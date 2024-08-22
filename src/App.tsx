@@ -46,7 +46,6 @@ const App: React.FC = () => {
         {selectedZodiac && selectedZodiacData ? (
             <ZodiacDescription
                 zodiac={selectedZodiacData}
-                horoscope={horoscope}
                 onBack={handleBack}
                 language={language}
             />
