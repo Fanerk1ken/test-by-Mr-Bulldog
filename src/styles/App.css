@@ -2,6 +2,8 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    color: #ffffff; /* Белый цвет текста */
+    background-color: #1c1c1e; /* Темный фон */
 }
 
 .zodiac-list {
@@ -11,36 +13,51 @@
 }
 
 .zodiac-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
+    border: 1px solid #3a3a3c;
+    border-radius: 12px;
+    padding: 20px;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background-color 0.2s;
+    background-color: #2c2c2e;
 }
 
 .zodiac-card:hover {
     transform: scale(1.05);
+    background-color: #3a3a3c;
 }
 
 .zodiac-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
 }
 
-.zodiac-description {
-    padding: 20px;
+.zodiac-card h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.zodiac-card p {
+    font-size: 14px;
+    color: #8e8e93;
 }
 
 .language-toggle {
     position: absolute;
     top: 10px;
     right: 10px;
-    padding: 5px 10px;
-    background-color: #f0f0f0;
+    padding: 8px 16px;
+    background-color: #3a3a3c;
+    color: #ffffff;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
+    font-size: 14px;
+}
+
+.language-toggle:hover {
+    background-color: #515154;
 }
 
 @media (max-width: 480px) {
