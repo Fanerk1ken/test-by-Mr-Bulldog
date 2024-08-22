@@ -14,8 +14,7 @@ const App: React.FC = () => {
   const [horoscope, setHoroscope] = useState<Horoscope | null>(null);
 
   useEffect(() => {
-    const webApp = WebApp.getInstance();
-    setLanguage(webApp.initDataUnsafe.user.language_code === 'ru' ? 'ru' : 'en');
+    setLanguage(WebApp.initDataUnsafe.user.language_code === 'ru' ? 'ru' : 'en');
   }, []);
 
   useEffect(() => {

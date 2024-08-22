@@ -11,11 +11,7 @@ declare module '@twa-dev/sdk' {
         expand(): void;
     }
 
-    const WebApp: {
-        getInstance(): WebApp;
-        isInitialized: boolean;
-        ready(): void;
-    };
+    const WebApp: WebApp;
 
     export default WebApp;
 }
