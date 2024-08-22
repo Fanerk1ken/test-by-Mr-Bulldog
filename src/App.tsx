@@ -9,10 +9,14 @@ import { Horoscope, Language } from './types';
 import './styles/App.css';
 
 const App: React.FC = () => {
-  const webApp = WebApp.getInstance();
-  const [language, setLanguage] = useState<Language>(webApp.initDataUnsafe.user.language_code === 'ru' ? 'ru' : 'en');
+  const [language, setLanguage] = useState<Language>('en');
   const [selectedZodiac, setSelectedZodiac] = useState<string | null>(null);
   const [horoscope, setHoroscope] = useState<Horoscope | null>(null);
+
+  useEffect(() => {
+    const webApp = WebApp.getInstance();
+    setLanguage(webApp.initDataUnsafe.user.language_code === 'ru' ? 'ru' : 'en');
+  }, []);
 
   useEffect(() => {
     if (selectedZodiac) {
