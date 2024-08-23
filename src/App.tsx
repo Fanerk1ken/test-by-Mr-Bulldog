@@ -15,7 +15,8 @@ const App: React.FC = () => {
     const initApp = async () => {
       try {
         await WebApp.ready();
-        const userLanguage = WebApp.initDataUnsafe.user?.language_code;
+        const userLanguage = WebApp.initDataUnsafe.user?.language_code || navigator.language;
+        console.log('Detected language:', userLanguage);
         setLanguage(userLanguage === 'ru' ? 'ru' : 'en');
       } catch (error) {
         console.error('Failed to initialize WebApp:', error);
