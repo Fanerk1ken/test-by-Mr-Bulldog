@@ -19,7 +19,6 @@ const App: React.FC = () => {
         setLanguage(userLanguage === 'ru' ? 'ru' : 'en');
       } catch (error) {
         console.error('Failed to initialize WebApp:', error);
-        // Используем английский язык по умолчанию в случае ошибки
         setLanguage('en');
       }
     };

@@ -2,63 +2,104 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    color: #ffffff; /* Белый цвет текста */
-    background-color: #1c1c1e; /* Темный фон */
+    font-family: Arial, sans-serif;
 }
 
 .zodiac-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
 }
 
 .zodiac-card {
-    border: 1px solid #3a3a3c;
-    border-radius: 12px;
-    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 15px;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
-    background-color: #2c2c2e;
+    transition: transform 0.2s;
 }
 
 .zodiac-card:hover {
     transform: scale(1.05);
-    background-color: #3a3a3c;
+}
+
+.zodiac-description {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    position: relative;
 }
 
 .zodiac-icon {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin-bottom: 10px;
-}
-
-.zodiac-card h2 {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.zodiac-card p {
-    font-size: 14px;
-    color: #8e8e93;
 }
 
 .language-toggle {
     position: absolute;
     top: 10px;
     right: 10px;
-    padding: 8px 16px;
-    background-color: #3a3a3c;
-    color: #ffffff;
+    padding: 5px 10px;
+    background-color: #007AFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.back-button-container:hover {
+    background-color: #e0e0e0;
+}
+
+.back-text {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #007AFF;
+    font-weight: bold;
+}
+
+.back-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
+    color: #007AFF;
+    transition: background-color 0.3s;
 }
 
-.language-toggle:hover {
-    background-color: #515154;
+.back-button:hover {
+    background-color: #e0e0e0;
 }
+
+.back-button span {
+    margin-left: 10px;
+}
+
 
 @media (max-width: 480px) {
     .zodiac-list {
