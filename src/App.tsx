@@ -3,27 +3,29 @@ import WebApp from '@twa-dev/sdk';
 import ZodiacList from './components/ZodiacList';
 import ZodiacDescription from './components/ZodiacDescription';
 import LanguageToggle from './components/LanguageToggle';
-import { fetchHoroscope } from './api/horoscopeApi';
 import { ZODIAC_SIGNS } from './constants';
-import { Horoscope, Language } from './types';
+import { Language } from './types';
 import './styles/App.css';
 
 const App: React.FC = () => {
   const [language, setLanguage] = useState<Language>('en');
   const [selectedZodiac, setSelectedZodiac] = useState<string | null>(null);
-  const [horoscope, setHoroscope] = useState<Horoscope | null>(null);
 
   useEffect(() => {
-    setLanguage(WebApp.initDataUnsafe.user.language_code === 'ru' ? 'ru' : 'en');
+    const initApp = async () => {
+      try {
+        await WebApp.ready();
+        const userLanguage = WebApp.initDataUnsafe.user?.language_code;
+        setLanguage(userLanguage === 'ru' ? 'ru' : 'en');
+      } catch (error) {
+        console.error('Failed to initialize WebApp:', error);
+        // Используем английский язык по умолчанию в случае ошибки
+        setLanguage('en');
+      }
+    };
+
+    initApp();
   }, []);
-
-  useEffect(() => {
-    if (selectedZodiac) {
-      fetchHoroscope(selectedZodiac, language)
-          .then(data => setHoroscope(data))
-          .catch(error => console.error('Error fetching horoscope:', error));
-    }
-  }, [selectedZodiac, language]);
 
   const handleZodiacClick = (zodiac: string) => {
     setSelectedZodiac(zodiac);
@@ -31,7 +33,6 @@ const App: React.FC = () => {
 
   const handleBack = () => {
     setSelectedZodiac(null);
-    setHoroscope(null);
   };
 
   const toggleLanguage = () => {

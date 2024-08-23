@@ -5,19 +5,21 @@ const HOROSCOPE_API_URL = 'https://poker247tech.ru/get_horoscope/';
 
 export const fetchHoroscope = async (sign: string, language: Language): Promise<Horoscope> => {
     try {
-        const horoscopeResponse = await axios.post(HOROSCOPE_API_URL, {
+        const response = await axios.post(HOROSCOPE_API_URL, {
             sign: sign,
             language: language === 'ru' ? 'original' : 'translated',
             period: 'today'
         });
 
-        if (horoscopeResponse.data && horoscopeResponse.data.description) {
-            return { description: horoscopeResponse.data.description };
+        console.log('API Response:', response.data);
+
+        if (response.data && response.data.horoscope) {
+            return { description: response.data.horoscope };
         } else {
             throw new Error('Invalid response format');
         }
     } catch (error) {
         console.error('Error fetching horoscope:', error);
-        throw new Error('Failed to fetch horoscope');
+        throw error;
     }
 };

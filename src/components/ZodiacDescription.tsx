@@ -15,12 +15,16 @@ const ZodiacDescription: React.FC<ZodiacDescriptionProps> = ({ zodiac, onBack, l
     const [horoscope, setHoroscope] = useState<Horoscope | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
+    const [tryAgain, setTryAgain] = useState(false)
 
     const handlers = useSwipeable({
         onSwipedRight: onBack,
         trackMouse: true
     });
+
+    const handleTryAgain = () => {
+        setTryAgain(!tryAgain)
+    }
 
     useEffect(() => {
         const fetchHoroscopeData = async () => {
@@ -30,14 +34,17 @@ const ZodiacDescription: React.FC<ZodiacDescriptionProps> = ({ zodiac, onBack, l
                 const data = await fetchHoroscope(zodiac.sign, language);
                 setHoroscope(data);
             } catch (err) {
-                setError('Failed to load horoscope. Please try again.');
+                console.error('Error in component:', err);
+                setError(err instanceof Error ? err.message : 'An unknown error occurred');
             } finally {
                 setIsLoading(false);
             }
         };
 
         fetchHoroscopeData();
-    }, [zodiac.sign, language]);
+    }, [zodiac.sign, language, tryAgain]);
+
+
 
     return (
         <div {...handlers} className="zodiac-description">
@@ -47,7 +54,12 @@ const ZodiacDescription: React.FC<ZodiacDescriptionProps> = ({ zodiac, onBack, l
                 <h2>{zodiac[language].name}</h2>
                 <p>{zodiac.period}</p>
                 {isLoading && <p>Loading...</p>}
-                {error && <p className="error">{error}</p>}
+                {error && (
+                    <div>
+                        <p className="error">{error}</p>
+                        <button onClick={handleTryAgain}>Try Again</button>
+                    </div>
+                )}
                 {!isLoading && !error && horoscope && <p>{horoscope.description}</p>}
             </div>
         </div>
