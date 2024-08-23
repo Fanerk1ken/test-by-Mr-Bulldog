@@ -15,9 +15,19 @@ const App: React.FC = () => {
     const initApp = async () => {
       try {
         await WebApp.ready();
-        const userLanguage = WebApp.initDataUnsafe.user?.language_code || navigator.language;
-        console.log('Detected language:', userLanguage);
-        setLanguage(userLanguage === 'ru' ? 'ru' : 'en');
+        console.log('WebApp ready');
+
+        // Получаем язык из WebApp
+        const webAppLanguage = WebApp.initDataUnsafe.user?.language_code;
+        console.log('Telegram language:', webAppLanguage);
+
+        if (webAppLanguage) {
+          // Устанавливаем русский только если язык точно русский, иначе английский
+          setLanguage(webAppLanguage.toLowerCase() === 'ru' ? 'ru' : 'en');
+        } else {
+          console.log('Telegram language not detected, defaulting to English');
+          setLanguage('en');
+        }
       } catch (error) {
         console.error('Failed to initialize WebApp:', error);
         setLanguage('en');
@@ -44,6 +54,7 @@ const App: React.FC = () => {
   return (
       <div className="app">
         <LanguageToggle language={language} onToggle={toggleLanguage} />
+        <div>Current language: {language}</div>
         {selectedZodiac && selectedZodiacData ? (
             <ZodiacDescription
                 zodiac={selectedZodiacData}
