@@ -16,13 +16,10 @@ const App: React.FC = () => {
       try {
         await WebApp.ready();
         console.log('WebApp ready');
-
-        // Получаем язык из WebApp
         const webAppLanguage = WebApp.initDataUnsafe.user?.language_code;
         console.log('Telegram language:', webAppLanguage);
 
         if (webAppLanguage) {
-          // Устанавливаем русский только если язык точно русский, иначе английский
           setLanguage(webAppLanguage.toLowerCase() === 'ru' ? 'ru' : 'en');
         } else {
           console.log('Telegram language not detected, defaulting to English');
