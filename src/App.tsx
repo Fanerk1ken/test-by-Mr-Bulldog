@@ -9,37 +9,29 @@ import './styles/App.css';
 const App: React.FC = () => {
   const [language, setLanguage] = useState<Language>('en');
   const [selectedZodiac, setSelectedZodiac] = useState<string | null>(null);
-  const [premium, setPremium] = useState(false);
+  // const [premium, setPremium] = useState(false);
 
   useEffect(() => {
     const initApp = async () => {
       try {
-        // Ждем, пока Telegram WebApp будет готов
         await window.Telegram.WebApp.ready();
-        console.log('WebApp ready');
 
-        // Получаем данные из initDataUnsafe
         const initData = window.Telegram.WebApp.initDataUnsafe;
-        console.log('WebApp.initDataUnsafe:', initData);
 
         if (initData.user) {
           const webAppLanguage = initData.user.language_code;
-          console.log('Telegram language:', webAppLanguage);
 
           if (webAppLanguage) {
             setLanguage(webAppLanguage.toLowerCase().startsWith('ru') ? 'ru' : 'en');
           } else {
-            console.log('Telegram language not detected, defaulting to English');
             setLanguage('en');
           }
 
-          setPremium(!!initData.user.is_premium);
+          // setPremium(!!initData.user.is_premium);
         } else {
-          console.log('User data not available');
           setLanguage('en');
         }
       } catch (error) {
-        console.error('Failed to initialize WebApp:', error);
         setLanguage('en');
       }
     };
@@ -64,8 +56,7 @@ const App: React.FC = () => {
   return (
       <div className="app">
         <LanguageToggle language={language} onToggle={toggleLanguage} />
-        <div className="premium">Premium? - {premium ? 'Yes' : 'No'}</div>
-        <div className="premium">Current language: {language}</div>
+        {/*<div className="premium">Premium? - {premium ? 'Yes' : 'No'}</div>*/}
         {selectedZodiac && selectedZodiacData ? (
             <ZodiacDescription
                 zodiac={selectedZodiacData}
