@@ -104,9 +104,9 @@
     background-color: #e0e0e0;
 }
 
-/*.premium {*/
-/*    color: red;*/
-/*}*/
+.premium {
+    color: red;
+}
 
 @media (max-width: 480px) {
     .zodiac-list {
