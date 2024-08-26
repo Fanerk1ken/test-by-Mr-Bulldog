@@ -10,14 +10,24 @@ import './styles/App.css';
 const App: React.FC = () => {
   const [language, setLanguage] = useState<Language>('en');
   const [selectedZodiac, setSelectedZodiac] = useState<string | null>(null);
+  const [premium, setPremium] = useState(false)
+
 
   useEffect(() => {
     const initApp = async () => {
       try {
         await WebApp.ready();
         console.log('WebApp ready');
+        console.log('WebApp.initDataUnsafe:', WebApp.initDataUnsafe);
+
         const webAppLanguage = WebApp.initDataUnsafe.user?.language_code;
         console.log('Telegram language:', webAppLanguage);
+
+        const webAppIsPremium = WebApp.initDataUnsafe.user.is_premium
+
+        if (webAppIsPremium) {
+          setPremium(true)
+        }
 
         if (webAppLanguage) {
           setLanguage(webAppLanguage.toLowerCase() === 'ru' ? 'ru' : 'en');
@@ -51,6 +61,7 @@ const App: React.FC = () => {
   return (
       <div className="app">
         <LanguageToggle language={language} onToggle={toggleLanguage} />
+        <div className="premium">Premium? - {premium}</div>
         <div>Current language: {language}</div>
         {selectedZodiac && selectedZodiacData ? (
             <ZodiacDescription

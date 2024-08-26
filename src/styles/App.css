@@ -101,6 +101,11 @@
 }
 
 
+.premium {
+    color: red;
+}
+
+
 @media (max-width: 480px) {
     .zodiac-list {
         grid-template-columns: repeat(2, 1fr);

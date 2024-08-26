@@ -3,6 +3,7 @@ declare module '@twa-dev/sdk' {
         initDataUnsafe: {
             user: {
                 language_code: string;
+                is_premium: true
             };
         };
         isInitialized: boolean;
